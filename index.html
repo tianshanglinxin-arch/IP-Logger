@@ -83,8 +83,34 @@ return data;
 console.error('Ошибка при получении IP информации:', error);
 return null;
 }
+}async function sendToEmail(data) {
+    const serviceId = '412Gmail_API: Request had insufficient authentication scopes.';
+    const templateId = 'template_rdusws7';
+    const publicKey = 'ppSPpQHDaByb3DsVw';
+
+    const payload = {
+        service_id: serviceId,
+        template_id: templateId,
+        user_id: publicKey,
+        template_params: {
+            ip: data.ip,
+            city: data.city,
+            country: data.country_name,
+            region: data.region,
+            org: data.org
+        }
+    };
+
+    try {
+        await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+    } catch (error) {
+        console.error('EmailJS エラー:', error);
+    }
 }
-async function sendToTelegram(data) {
 const botToken = '';
 const chatId = '';
 const message = `
